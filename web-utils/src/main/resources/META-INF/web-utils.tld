@@ -1,0 +1,318 @@
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-jsptaglibrary_2_1.xsd"
+	version="2.1">
+	<description>A tag library from web-utils project.</description>
+	<tlib-version>0.2</tlib-version>
+	<short-name>web-utils</short-name>
+	<uri>http://mikha.org/web-utils</uri>
+	<tag>
+		<name>set</name>
+		<tag-class>org.mikha.utils.web.jsp.SetTag</tag-class>
+		<body-content>scriptless</body-content>
+		<description>
+			Sets the result of an expression evaluation in 'page' scope.
+			Similar to &lt;set&gt; tag from JSTL Core Tag library, but
+			overrides value if there is HTTP parameter with the same
+			name.
+		</description>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<type>java.lang.Object</type>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>var</name>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	<tag>
+		<name>error</name>
+		<tag-class>org.mikha.utils.web.jsp.ErrorTag</tag-class>
+		<body-content>scriptless</body-content>
+		<description>
+			Prints error text or stores it in specified 'page' scope
+			variable if there is a error in form parameter with
+			specified name.
+		</description>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>var</name>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	<tag>
+		<name>iferrors</name>
+		<tag-class>org.mikha.utils.web.jsp.IferrorsTag</tag-class>
+		<body-content>scriptless</body-content>
+		<description>
+			Executes body only if there are errors in some of form
+			parameters.
+		</description>
+	</tag>
+	<tag>
+		<name>iferror</name>
+		<tag-class>org.mikha.utils.web.jsp.IferrorTag</tag-class>
+		<body-content>scriptless</body-content>
+		<description>
+			Executes body only if there is a error in a form parameter
+			with specified name. Error text is (optionally) available in
+			'page' scope variable.
+		</description>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>var</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<variable>
+			<name-from-attribute>var</name-from-attribute>
+			<declare>false</declare>
+		</variable>
+	</tag>
+	<tag>
+		<name>ifnoerrors</name>
+		<tag-class>org.mikha.utils.web.jsp.IfnoerrorsTag</tag-class>
+		<body-content>scriptless</body-content>
+		<description>
+			Executes body only if there are no errors in form
+			parameters.
+		</description>
+	</tag>
+	<tag>
+		<name>ifnoerror</name>
+		<tag-class>org.mikha.utils.web.jsp.IfnoerrorTag</tag-class>
+		<body-content>scriptless</body-content>
+		<description>
+			Executes body only if there is no error in form parameter
+			with specified name.
+		</description>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>msg</name>
+		<tag-class>org.mikha.utils.web.jsp.MsgTag</tag-class>
+		<body-content>empty</body-content>
+		<description>A "msg" tag</description>
+		<attribute>
+			<name>i18n</name>
+			<type>java.lang.Boolean</type>
+		</attribute>
+	</tag>
+	<tag>
+		<name>safeHtml</name>
+		<tag-class>org.mikha.utils.web.jsp.SafeHtmlTag</tag-class>
+		<body-content>scriptless</body-content>
+		<description>
+			Escapes special XML characters (&lt;, &gt;, &amp;, &quot;,
+			&#039;) plus large set of other characters to provide XSS
+			protection.
+		</description>
+		<attribute>
+			<name>value</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+    <tag>
+        <name>escapeXml</name>
+        <tag-class>org.mikha.utils.web.jsp.EscapeXmlTag</tag-class>
+        <body-content>scriptless</body-content>
+        <description>
+            Escapes special XML characters (&lt;, &gt;, &amp;, &quot;, &#039;).
+        </description>
+        <attribute>
+            <name>value</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>var</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+	<tag>
+		<name>url</name>
+		<tag-class>org.mikha.utils.web.jsp.UrlTag</tag-class>
+		<body-content>scriptless</body-content>
+		<description>
+			Similar to &lt;url&gt; tag from JSTL Core Tag library, but
+			additionally encodes URL using UTF-8 and escapes &amp; with
+			&amp;amp; to produce value to be used in "href" attribute.
+		</description>
+		<attribute>
+			<name>value</name>
+			<required>true</required>
+			<type>java.lang.Object</type>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	<tag>
+		<name>param</name>
+		<tag-class>org.mikha.utils.web.jsp.ParamTag</tag-class>
+		<body-content>scriptless</body-content>
+		<description>
+			Used inside &lt;url&gt; and &lt;form&gt; tag to provide
+			named parameters.
+		</description>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<type>java.lang.Object</type>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>form</name>
+		<tag-class>org.mikha.utils.web.jsp.FormTag</tag-class>
+		<body-content>scriptless</body-content>
+		<description>
+			Similar to &lt;url&gt; tag, but generates form with hidden
+			parameters instead. &lt;input type="submit"&gt; must be
+			included explicitly.
+		</description>
+		<attribute>
+			<name>url</name>
+			<type>java.lang.Object</type>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>method</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>id</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>class</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>style</name>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	<function>
+		<description>
+			Returns effective value for input parameter with given name
+			(tries HTTP parameter first, uses given default value if
+			HTTP parameter is not found).
+		</description>
+		<name>param</name>
+		<function-class>
+			org.mikha.utils.web.jsp.JspSupport
+		</function-class>
+		<function-signature>
+			Object getParam(javax.servlet.jsp.PageContext,
+			java.lang.String, java.lang.Object)
+		</function-signature>
+		<example>
+			&lt;c:set var="tmp" value="${wu:param(pageContext,'myparam',
+			'nice string')}"/&gt;
+		</example>
+	</function>
+	<function>
+		<description>
+			Tests if current request has any input parameter errors.
+		</description>
+		<name>hasErrors</name>
+		<function-class>
+			org.mikha.utils.web.jsp.JspSupport
+		</function-class>
+		<function-signature>
+			boolean hasErrors(javax.servlet.jsp.PageContext)
+		</function-signature>
+		<example>
+			&lt;c:if test="${wu:hasErrors(pageContext)}"&gt;
+		</example>
+	</function>
+	<function>
+		<description>
+			Tests if there is an error for input parameter with given
+			name.
+		</description>
+		<name>hasError</name>
+		<function-class>
+			org.mikha.utils.web.jsp.JspSupport
+		</function-class>
+		<function-signature>
+			boolean hasError(javax.servlet.jsp.PageContext,
+			java.lang.String)
+		</function-signature>
+		<example>
+			&lt;c:if test="${wu:hasError(pageContext,'myparam')}"&gt;
+		</example>
+	</function>
+	<function>
+		<description>
+			Returns error (if any) for input parameter with given name.
+		</description>
+		<name>error</name>
+		<function-class>
+			org.mikha.utils.web.jsp.JspSupport
+		</function-class>
+		<function-signature>
+			java.lang.String getError(javax.servlet.jsp.PageContext,
+			java.lang.String)
+		</function-signature>
+		<example>
+			&lt;c:set var="tmp"
+			value="${wu:error(pageContext,'myparam')}"/&gt;
+		</example>
+	</function>
+	<function>
+		<description>
+			Tests if given array contains given value.
+		</description>
+		<name>inArray</name>
+		<function-class>
+			org.mikha.utils.web.jsp.JspSupport
+		</function-class>
+		<function-signature>
+			boolean inArray(java.lang.Object, java.lang.Object)
+		</function-signature>
+		<example>
+			&lt;c:if test="${wu:contains(array, value)}"&gt;
+		</example>
+	</function>
+
+</taglib>

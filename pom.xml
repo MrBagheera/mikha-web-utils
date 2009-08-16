@@ -1,0 +1,78 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.mikha.utils</groupId>
+	<version>1.0-alpha3-SNAPSHOT</version>
+	<artifactId>web-utils-parent</artifactId>
+	<packaging>pom</packaging>
+	<name>Mikha's Web Utilities - Meta-Project</name>
+	<url>http://projects.mikha.ru/web-utils</url>
+
+	<modules>
+		<module>web-utils</module>
+		<module>web-utils-examples</module>
+	</modules>
+
+	<distributionManagement>
+		<repository>
+			<id>maven.mikha.ru</id>
+			<url>ftp://u172221.ftp.masterhost.ru/</url>
+		</repository>
+	</distributionManagement>
+
+	<scm>
+		<connection>scm:svn:svn+ssh://shere-khan.mikha.ru/public/SVN/Default/web-utils/trunk</connection>
+		<developerConnection>scm:svn:svn+ssh://shere-khan.mikha.ru/public/SVN/Default/web-utils/trunk</developerConnection>
+	</scm>
+
+	<repositories>
+		<repository>
+			<id>maven.mikha.ru</id>
+			<url>http://projects.mikha.ru/maven</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.5</source>
+						<target>1.5</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-eclipse-plugin</artifactId>
+					<configuration>
+                      <downloadSources>true</downloadSources>
+                      <downloadJavadocs>true</downloadJavadocs>
+						<buildOutputDirectory>
+							${basedir}/target-ide
+						</buildOutputDirectory>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+			</plugin>
+		</plugins>
+
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ftp</artifactId>
+				<version>1.0-beta-2</version>
+			</extension>
+		</extensions>
+	</build>
+
+</project>

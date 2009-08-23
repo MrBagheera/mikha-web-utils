@@ -1,38 +1,35 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.mikha.utils</groupId>
+	<groupId>net.sourceforge.mikha-web-utils</groupId>
 	<version>1.0-alpha3-SNAPSHOT</version>
 	<artifactId>web-utils-parent</artifactId>
 	<packaging>pom</packaging>
 	<name>Mikha's Web Utilities - Meta-Project</name>
-	<url>http://projects.mikha.ru/web-utils</url>
+	<url>http://mikha-web-utils.sourceforge.net/</url>
+	<licenses>
+		<license>
+			<name>GNU Lesser General Public License, Version 3.0</name>
+			<url>http://www.gnu.org/licenses/lgpl.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<scm>
+		<url>https://sourceforge.net/apps/trac/mikha-web-utils/browser</url>
+		<connection>scm:svn:https://mikha-web-utils.svn.sourceforge.net/svnroot/mikha-web-utils/trunk</connection>
+	</scm>
+
+	<distributionManagement>
+		<repository>
+			<id>mikha-web-utils.sourceforge.net</id>
+			<url>sftp://web.sourceforge.net/home/groups/m/mi/mikha-web-utils/htdocs/maven/</url>
+		</repository>
+	</distributionManagement>
 
 	<modules>
 		<module>web-utils</module>
 		<module>web-utils-examples</module>
 	</modules>
-
-	<distributionManagement>
-		<repository>
-			<id>maven.mikha.ru</id>
-			<url>ftp://u172221.ftp.masterhost.ru/</url>
-		</repository>
-	</distributionManagement>
-
-	<scm>
-		<connection>scm:svn:svn+ssh://shere-khan.mikha.ru/public/SVN/Default/web-utils/trunk</connection>
-		<developerConnection>scm:svn:svn+ssh://shere-khan.mikha.ru/public/SVN/Default/web-utils/trunk</developerConnection>
-	</scm>
-
-	<repositories>
-		<repository>
-			<id>maven.mikha.ru</id>
-			<url>http://projects.mikha.ru/maven</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
 
 	<build>
 		<pluginManagement>
@@ -54,23 +51,17 @@
 						<buildOutputDirectory>
 							${basedir}/target-ide
 						</buildOutputDirectory>
+						<downloadJavadocs>true</downloadJavadocs>
+						<downloadSources>true</downloadSources>
 					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
 
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-			</plugin>
-		</plugins>
-
 		<extensions>
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-ftp</artifactId>
-				<version>1.0-beta-2</version>
+				<artifactId>wagon-ssh</artifactId>
 			</extension>
 		</extensions>
 	</build>

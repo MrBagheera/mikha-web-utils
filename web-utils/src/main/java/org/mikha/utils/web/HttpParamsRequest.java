@@ -88,7 +88,7 @@ public class HttpParamsRequest extends HttpServletRequestWrapper
                 }
                 return defValue;
             }
-            if (value.trim().length() == 0)
+            if (value.length() == 0)
             {
                 if (mandatory)
                 {

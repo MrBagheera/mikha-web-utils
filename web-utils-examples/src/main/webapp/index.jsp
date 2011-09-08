@@ -25,6 +25,7 @@
 <ul>
 <li><a href="i18n">Internationalization</a></li>
 <li><a href="redirect">Redirect</a></li>
+<li><a href="path/url.jsp">&lt;url&gt; tag demo</a></li>
 </ul>
 </body>
 </html>

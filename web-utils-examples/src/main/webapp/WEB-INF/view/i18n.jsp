@@ -9,12 +9,12 @@
 <table>
 <tr>
 <td>Raw error:</td>
-<td><wu:error name="param1"/></td>
+<td><wu:error name="param1" defaultText="No custom error message was defined"/></td>
 </tr>
 <tr>
 <td>Localized error:</td>
 <td>
-<wu:iferror name="param1" var="error"><fmt:message key="${error}"/></wu:iferror>
+<wu:iferror name="param1" var="error"><fmt:message key="error.param1"/></wu:iferror>
 </td>
 </tr>
 <tr>

@@ -19,6 +19,7 @@
 package org.mikha.utils.web.jsp;
 
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.PageContext;
@@ -61,8 +62,8 @@ public class JspSupport
     @SuppressWarnings("unchecked")
     public static boolean hasErrors(PageContext ctx)
     {
-        Map<String, String> errs =
-            (Map<String, String>) ctx.getAttribute(HttpParamsRequest.ATTR_ERRORS, PageContext.REQUEST_SCOPE);
+        Set<String> errs =
+            (Set<String>) ctx.getAttribute(HttpParamsRequest.ATTR_ERROR_STATES, PageContext.REQUEST_SCOPE);
         return (errs != null && errs.size() > 0);
     }
 
@@ -76,23 +77,23 @@ public class JspSupport
     @SuppressWarnings("unchecked")
     public static boolean hasError(PageContext ctx, String name)
     {
-        Map<String, String> errs =
-            (Map<String, String>) ctx.getAttribute(HttpParamsRequest.ATTR_ERRORS, PageContext.REQUEST_SCOPE);
-        return (errs != null && (errs.get(name) != null));
+        Set<String> errs =
+            (Set<String>) ctx.getAttribute(HttpParamsRequest.ATTR_ERROR_STATES, PageContext.REQUEST_SCOPE);
+        return (errs != null && errs.contains(name));
     }
 
     /**
-     * Returns error (if any) for input parameter with given name.
+     * Returns custom error message (if any) for input parameter with given name.
      * @param ctx page context
      * @param name input parameter name
-     * @return error for input parameter with given name of <code>null</code>,
+     * @return custom error message for input parameter with given name of <code>null</code>,
      *         if there is no error
      */
     @SuppressWarnings("unchecked")
     public static String getError(PageContext ctx, String name)
     {
         Map<String, String> errs =
-            (Map<String, String>) ctx.getAttribute(HttpParamsRequest.ATTR_ERRORS, PageContext.REQUEST_SCOPE);
+            (Map<String, String>) ctx.getAttribute(HttpParamsRequest.ATTR_ERROR_MESSAGES, PageContext.REQUEST_SCOPE);
         return (errs != null ? errs.get(name) : null);
     }
 

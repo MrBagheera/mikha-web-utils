@@ -37,11 +37,20 @@ public class ErrorTag extends SimpleTagSupport
 
     private String name;
 
-    private String var;
+    private String var = null;
+    
+    private String defaultText = null;
 
     public void doTag() throws JspException, IOException
     {
-        String err = JspSupport.getError((PageContext) getJspContext(), name);
+        String err = null;
+        if (JspSupport.hasError((PageContext) getJspContext(), name)) {
+            err = JspSupport.getError((PageContext) getJspContext(), name);
+            if (err == null) {
+                err = defaultText;
+            }
+        }
+
         if (var != null)
         {
             getJspContext().setAttribute(var, err);
@@ -63,6 +72,11 @@ public class ErrorTag extends SimpleTagSupport
     public void setVar(String var)
     {
         this.var = var;
+    }
+    
+    public void setDefaultText(String defaultText)
+    {
+        this.defaultText = defaultText;
     }
 
 }

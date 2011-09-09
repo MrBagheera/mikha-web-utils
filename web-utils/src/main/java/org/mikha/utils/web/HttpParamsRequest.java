@@ -21,10 +21,12 @@ package org.mikha.utils.web;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -64,7 +66,10 @@ public class HttpParamsRequest extends HttpServletRequestWrapper
         Pattern.CASE_INSENSITIVE);
 
     /** request attribute key to store map of parameter errors */
-    public static final String ATTR_ERRORS = "_errors";
+    public static final String ATTR_ERROR_STATES = "_errors";
+
+    /** request attribute key to store map of parameter error messages */
+    public static final String ATTR_ERROR_MESSAGES = "_error_messages";
 
     /** request attribute to store message text */
     public static final String ATTR_MESSAGE_TEXT = "_message";
@@ -201,37 +206,46 @@ public class HttpParamsRequest extends HttpServletRequestWrapper
      * Wraps given request into <code>EnhancedHttpRequest</code> (or simply
      * casts request <code>EnhancedHttpRequest</code>, if possible).
      * @param request original request
-     * @return instance of <code>EnhancedHttpRequest</code> that wraps
-     *         original request
+     * @return instance of <code>EnhancedHttpRequest</code> that wraps original
+     *         request
      * @throws ServletException if failed to process uploaded file
      */
-    @SuppressWarnings("unchecked")
     public static HttpParamsRequest wrap(ServletRequest request) throws ServletException
     {
         if (request instanceof HttpParamsRequest)
         {
             return (HttpParamsRequest) request;
         }
-        HttpServletRequest req = (HttpServletRequest) request;
 
-        Map<String, String> errors = (Map<String, String>) req.getAttribute(ATTR_ERRORS);
-        if (errors == null)
-        {
-            errors = new HashMap<String, String>();
-            req.setAttribute(ATTR_ERRORS, errors);
-        }
-
-        return new HttpParamsRequest((HttpServletRequest) request, errors);
+        return new HttpParamsRequest((HttpServletRequest) request);
     }
 
-    private final Map<String, String> errors;
+    private final Set<String> paramsWithErrors;
+
+    private final Map<String, String> errorMessagesByParam;
 
     private boolean hasRecentErrors = false;
 
-    private HttpParamsRequest(HttpServletRequest request, Map<String, String> errors)
+    @SuppressWarnings("unchecked")
+    private HttpParamsRequest(HttpServletRequest request)
     {
         super(request);
-        this.errors = errors;
+
+        Set<String> paramsWithErrors = (Set<String>) request.getAttribute(ATTR_ERROR_STATES);
+        if (paramsWithErrors == null)
+        {
+            paramsWithErrors = new HashSet<String>();
+            request.setAttribute(ATTR_ERROR_STATES, paramsWithErrors);
+        }
+        this.paramsWithErrors = paramsWithErrors;
+
+        Map<String, String> errorMessagesByParam = (Map<String, String>) request.getAttribute(ATTR_ERROR_MESSAGES);
+        if (errorMessagesByParam == null)
+        {
+            errorMessagesByParam = new HashMap<String, String>();
+            request.setAttribute(ATTR_ERROR_MESSAGES, errorMessagesByParam);
+        }
+        this.errorMessagesByParam = errorMessagesByParam;
     }
 
     /**
@@ -258,8 +272,7 @@ public class HttpParamsRequest extends HttpServletRequestWrapper
     /**
      * Parses mandatory string parameter. Logs error if parameter is missing.
      * @param name parameter name
-     * @return value of parameter or <code>null</code>, if parameter is
-     *         missing
+     * @return value of parameter or <code>null</code>, if parameter is missing
      */
     public String getString(String name)
     {
@@ -308,8 +321,8 @@ public class HttpParamsRequest extends HttpServletRequestWrapper
      * Parses mandatory e-mail parameter. Logs error if parameter is missing or
      * invalid.
      * @param name parameter name
-     * @return value of parameter or <code>null</code>, if parameter is
-     *         missing or invalid
+     * @return value of parameter or <code>null</code>, if parameter is missing
+     *         or invalid
      */
     public String getEmail(String name)
     {
@@ -352,8 +365,8 @@ public class HttpParamsRequest extends HttpServletRequestWrapper
      * Parses mandatory integer parameter. Logs error if parameter is missing or
      * invalid.
      * @param name parameter name
-     * @return value of parameter or <code>null</code>, if parameter is
-     *         missing or invalid
+     * @return value of parameter or <code>null</code>, if parameter is missing
+     *         or invalid
      */
     public Integer getInteger(String name)
     {
@@ -404,8 +417,8 @@ public class HttpParamsRequest extends HttpServletRequestWrapper
      * Parses mandatory floating-point parameter. Logs error if parameter is
      * missing or invalid.
      * @param name parameter name
-     * @return value of parameter or <code>null</code>, if parameter is
-     *         missing or invalid
+     * @return value of parameter or <code>null</code>, if parameter is missing
+     *         or invalid
      */
     public Double getDouble(String name)
     {
@@ -457,8 +470,8 @@ public class HttpParamsRequest extends HttpServletRequestWrapper
      * Parses boolean parameter. Boolean parameters are optional by definition,
      * default value is always {@link Boolean#FALSE}.
      * @param name parameter name
-     * @return value of parameter or <code>Boolean.FALSE</code>, if parameter
-     *         is missing or invalid
+     * @return value of parameter or <code>Boolean.FALSE</code>, if parameter is
+     *         missing or invalid
      */
     public boolean getBoolean(String name)
     {
@@ -480,11 +493,12 @@ public class HttpParamsRequest extends HttpServletRequestWrapper
     }
 
     /**
-     * Parses parameter as single index in array of options. 
+     * Parses parameter as single index in array of options.
      * @param <O> option class
      * @param name parameter
      * @param options array of possible options
-     * @return single option from array of possible options (indexed by parameter) 
+     * @return single option from array of possible options (indexed by
+     *         parameter)
      */
     public <O> O getOption(String name, O[] options)
     {
@@ -497,7 +511,8 @@ public class HttpParamsRequest extends HttpServletRequestWrapper
         }
         for (String v : values)
         {
-            if (result != null) {
+            if (result != null)
+            {
                 logParameterError(name);
                 return null;
             }
@@ -518,7 +533,8 @@ public class HttpParamsRequest extends HttpServletRequestWrapper
             }
             result = options[i];
         }
-        if (result == null) {
+        if (result == null)
+        {
             logParameterError(name);
             return null;
         }
@@ -526,11 +542,12 @@ public class HttpParamsRequest extends HttpServletRequestWrapper
     }
 
     /**
-     * Parses parameter as arrays of indices in array of options. 
+     * Parses parameter as arrays of indices in array of options.
      * @param <O> option class
      * @param name parameter
      * @param options array of possible options
-     * @return list containing options from array of possible options (indexed by parameters) 
+     * @return list containing options from array of possible options (indexed
+     *         by parameters)
      */
     public <O> List<O> getOptions(String name, O[] options)
     {
@@ -563,7 +580,7 @@ public class HttpParamsRequest extends HttpServletRequestWrapper
     }
 
     /**
-     * Logs default error related to given parameter.
+     * Logs error related to given parameter.
      * @param name parameter name
      * @deprecated use {@link #logParameterError(String)} instead
      */
@@ -574,7 +591,7 @@ public class HttpParamsRequest extends HttpServletRequestWrapper
     }
 
     /**
-     * Logs custom error related to given parameter.
+     * Logs custom error message related to given parameter.
      * @param name parameter name
      * @param error custom error
      * @deprecated use {@link #logParameterError(String)} instead
@@ -586,28 +603,31 @@ public class HttpParamsRequest extends HttpServletRequestWrapper
     }
 
     /**
-     * Logs default error related to given parameter.
+     * Logs error related to given parameter.
      * @param name parameter name
+     * @see #hasParameterError(String)
      */
     public void logParameterError(String name)
     {
         hasRecentErrors = true;
-        errors.put(name, "error." + name);
+        paramsWithErrors.add(name);
     }
 
     /**
-     * Logs custom error related to given parameter.
+     * Logs custom error message related to given parameter.
      * @param name parameter name
      * @param error custom error
+     * @see #logParameterError(String)
+     * @see #getParameterError(String)
      */
     public void logParameterError(String name, String error)
     {
-        hasRecentErrors = true;
-        errors.put(name, error);
+        logParameterError(name);
+        errorMessagesByParam.put(name, error);
     }
 
     /**
-     * Returns whether this request had errors since last call to
+     * Returns whether this request has errors logged since last call to
      * {@link #clearRecentErrors()}.
      * @return <code>true</code> if this request has recent errors;
      *         <code>false</code> otherwise
@@ -634,11 +654,12 @@ public class HttpParamsRequest extends HttpServletRequestWrapper
      */
     public boolean hasErrors()
     {
-        return (errors.size() > 0);
+        return (paramsWithErrors.size() > 0);
     }
 
     /**
-     * Returns a error (if present) for a parameter with given name.
+     * Returns custom error message (if present) for a parameter with given
+     * name.
      * @param param parameter name
      * @return error for a parameter with given name or <code>null</code>
      * @deprecated Use {@link #getParameterError(String)} instead
@@ -650,13 +671,30 @@ public class HttpParamsRequest extends HttpServletRequestWrapper
     }
 
     /**
-     * Returns a error (if present) for a parameter with given name.
+     * Checks if a error was logged for a parameter with given name.
+     * @param name parameter name
+     * @return <code>true</code> if error was logged for a parameter with given
+     *         name; <code>false</code> otherwise
+     * @see #logParameterError(String)
+     */
+    public boolean hasParameterError(String name)
+    {
+        return paramsWithErrors.contains(name);
+    }
+
+    /**
+     * Returns custom error message (if present) for a parameter with given
+     * name. Note: This method is not suitable to check if there is a error
+     * logged for a parameter, use {@link #hasParameterError(String)} instead.
      * @param param parameter name
-     * @return error for a parameter with given name or <code>null</code>
+     * @return custom error message for a parameter with given name or
+     *         <code>null</code>
+     * @see #hasParameterError(String)
+     * @see #logParameterError(String, String)
      */
     public String getParameterError(String param)
     {
-        return errors.get(param);
+        return errorMessagesByParam.get(param);
     }
 
     /**

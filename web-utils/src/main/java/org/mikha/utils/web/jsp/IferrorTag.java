@@ -40,8 +40,7 @@ public class IferrorTag extends SimpleTagSupport
 
     public void doTag() throws JspException, IOException
     {
-        String err = JspSupport.getError((PageContext) getJspContext(), name);
-        if (err == null)
+        if (!JspSupport.hasError((PageContext) getJspContext(), name))
         {
             return;
         }
@@ -51,7 +50,10 @@ public class IferrorTag extends SimpleTagSupport
         {
             if (var != null)
             {
-                getJspContext().setAttribute(var, err);
+                String err = JspSupport.getError((PageContext) getJspContext(), name);
+                if (err != null) {
+                    getJspContext().setAttribute(var, err);
+                }
             }
             f.invoke(null);
         }

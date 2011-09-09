@@ -51,6 +51,10 @@
 			<name>var</name>
 			<type>java.lang.String</type>
 		</attribute>
+		<attribute>
+			<name>defaultText</name>
+			<type>java.lang.String</type>
+		</attribute>
 	</tag>
 	<tag>
 		<name>iferrors</name>

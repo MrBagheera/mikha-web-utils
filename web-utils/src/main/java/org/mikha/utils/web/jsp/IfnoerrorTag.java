@@ -43,8 +43,7 @@ public class IfnoerrorTag extends SimpleTagSupport
 
     public void doTag() throws JspException, IOException
     {
-        String err = JspSupport.getError((PageContext) getJspContext(), name);
-        if (err != null)
+        if (JspSupport.hasError((PageContext) getJspContext(), name))
         {
             return;
         }

@@ -48,11 +48,6 @@
 					<configuration>
                       <downloadSources>true</downloadSources>
                       <downloadJavadocs>true</downloadJavadocs>
-						<buildOutputDirectory>
-							${basedir}/target-ide
-						</buildOutputDirectory>
-						<downloadJavadocs>true</downloadJavadocs>
-						<downloadSources>true</downloadSources>
 					</configuration>
 				</plugin>
 			</plugins>

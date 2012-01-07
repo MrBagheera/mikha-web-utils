@@ -1,237 +1,249 @@
-<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-jsptaglibrary_2_1.xsd"
-	version="2.1">
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee web-jsptaglibrary_2_1.xsd"
+        version="2.1">
 	<description>A tag library from web-utils project.</description>
 	<tlib-version>0.2</tlib-version>
 	<short-name>web-utils</short-name>
 	<uri>http://mikha.org/web-utils</uri>
 	<tag>
-		<name>set</name>
-		<tag-class>org.mikha.utils.web.jsp.SetTag</tag-class>
-		<body-content>scriptless</body-content>
 		<description>
 			Sets the result of an expression evaluation in 'page' scope.
 			Similar to &lt;set&gt; tag from JSTL Core Tag library, but
 			overrides value if there is HTTP parameter with the same
 			name.
 		</description>
+		<name>set</name>
+		<tag-class>org.mikha.utils.web.jsp.SetTag</tag-class>
+		<body-content>scriptless</body-content>
 		<attribute>
 			<name>name</name>
 			<required>true</required>
-			<type>java.lang.String</type>
 			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<name>value</name>
-			<type>java.lang.Object</type>
 			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<name>var</name>
+			<rtexprvalue>false</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 	</tag>
 	<tag>
-		<name>error</name>
-		<tag-class>org.mikha.utils.web.jsp.ErrorTag</tag-class>
-		<body-content>scriptless</body-content>
 		<description>
 			Prints error text or stores it in specified 'page' scope
 			variable if there is a error in form parameter with
 			specified name.
 		</description>
+		<name>error</name>
+		<tag-class>org.mikha.utils.web.jsp.ErrorTag</tag-class>
+		<body-content>scriptless</body-content>
 		<attribute>
 			<name>name</name>
 			<required>true</required>
-			<type>java.lang.String</type>
 			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<name>var</name>
+			<rtexprvalue>false</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<name>defaultText</name>
+			<rtexprvalue>false</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 	</tag>
 	<tag>
-		<name>iferrors</name>
-		<tag-class>org.mikha.utils.web.jsp.IferrorsTag</tag-class>
-		<body-content>scriptless</body-content>
 		<description>
 			Executes body only if there are errors in some of form
 			parameters.
 		</description>
+		<name>iferrors</name>
+		<tag-class>org.mikha.utils.web.jsp.IferrorsTag</tag-class>
+		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
-		<name>iferror</name>
-		<tag-class>org.mikha.utils.web.jsp.IferrorTag</tag-class>
-		<body-content>scriptless</body-content>
 		<description>
 			Executes body only if there is a error in a form parameter
 			with specified name. Error text is (optionally) available in
 			'page' scope variable.
 		</description>
-		<attribute>
-			<name>name</name>
-			<required>true</required>
-			<type>java.lang.String</type>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>var</name>
-			<type>java.lang.String</type>
-		</attribute>
+		<name>iferror</name>
+		<tag-class>org.mikha.utils.web.jsp.IferrorTag</tag-class>
+		<body-content>scriptless</body-content>
 		<variable>
 			<name-from-attribute>var</name-from-attribute>
 			<declare>false</declare>
 		</variable>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>var</name>
+			<rtexprvalue>false</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
 	</tag>
 	<tag>
-		<name>ifnoerrors</name>
-		<tag-class>org.mikha.utils.web.jsp.IfnoerrorsTag</tag-class>
-		<body-content>scriptless</body-content>
 		<description>
 			Executes body only if there are no errors in form
 			parameters.
 		</description>
+		<name>ifnoerrors</name>
+		<tag-class>org.mikha.utils.web.jsp.IfnoerrorsTag</tag-class>
+		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
-		<name>ifnoerror</name>
-		<tag-class>org.mikha.utils.web.jsp.IfnoerrorTag</tag-class>
-		<body-content>scriptless</body-content>
 		<description>
 			Executes body only if there is no error in form parameter
 			with specified name.
 		</description>
+		<name>ifnoerror</name>
+		<tag-class>org.mikha.utils.web.jsp.IfnoerrorTag</tag-class>
+		<body-content>scriptless</body-content>
 		<attribute>
 			<name>name</name>
 			<required>true</required>
-			<type>java.lang.String</type>
 			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
 		</attribute>
 	</tag>
 	<tag>
+		<description>A "msg" tag</description>
 		<name>msg</name>
 		<tag-class>org.mikha.utils.web.jsp.MsgTag</tag-class>
 		<body-content>empty</body-content>
-		<description>A "msg" tag</description>
 		<attribute>
 			<name>i18n</name>
+			<rtexprvalue>false</rtexprvalue>
 			<type>java.lang.Boolean</type>
 		</attribute>
 	</tag>
 	<tag>
-		<name>safeHtml</name>
-		<tag-class>org.mikha.utils.web.jsp.SafeHtmlTag</tag-class>
-		<body-content>scriptless</body-content>
 		<description>
 			Escapes special XML characters (&lt;, &gt;, &amp;, &quot;,
 			&#039;) plus large set of other characters to provide XSS
 			protection.
 		</description>
+		<name>safeHtml</name>
+		<tag-class>org.mikha.utils.web.jsp.SafeHtmlTag</tag-class>
+		<body-content>scriptless</body-content>
 		<attribute>
 			<name>value</name>
 			<required>false</required>
-			<type>java.lang.String</type>
 			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<name>var</name>
 			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 	</tag>
     <tag>
-        <name>escapeXml</name>
-        <tag-class>org.mikha.utils.web.jsp.EscapeXmlTag</tag-class>
-        <body-content>scriptless</body-content>
         <description>
             Escapes special XML characters (&lt;, &gt;, &amp;, &quot;, &#039;).
         </description>
+        <name>escapeXml</name>
+        <tag-class>org.mikha.utils.web.jsp.EscapeXmlTag</tag-class>
+        <body-content>scriptless</body-content>
         <attribute>
             <name>value</name>
             <required>false</required>
-            <type>java.lang.String</type>
             <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <name>var</name>
             <required>false</required>
+            <rtexprvalue>false</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
     </tag>
 	<tag>
-		<name>url</name>
-		<tag-class>org.mikha.utils.web.jsp.UrlTag</tag-class>
-		<body-content>scriptless</body-content>
 		<description>
 			Similar to &lt;url&gt; tag from JSTL Core Tag library, but
 			additionally encodes URL using UTF-8 and escapes &amp; with
 			&amp;amp; to produce value to be used in "href" attribute.
 		</description>
+		<name>url</name>
+		<tag-class>org.mikha.utils.web.jsp.UrlTag</tag-class>
+		<body-content>scriptless</body-content>
 		<attribute>
 			<name>value</name>
 			<required>true</required>
-			<type>java.lang.Object</type>
 			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<name>var</name>
 			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 	</tag>
 	<tag>
-		<name>param</name>
-		<tag-class>org.mikha.utils.web.jsp.ParamTag</tag-class>
-		<body-content>scriptless</body-content>
 		<description>
 			Used inside &lt;url&gt; and &lt;form&gt; tag to provide
 			named parameters.
 		</description>
+		<name>param</name>
+		<tag-class>org.mikha.utils.web.jsp.ParamTag</tag-class>
+		<body-content>scriptless</body-content>
 		<attribute>
 			<name>name</name>
 			<required>true</required>
-			<type>java.lang.String</type>
 			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<name>value</name>
-			<type>java.lang.Object</type>
 			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
 		</attribute>
 	</tag>
 	<tag>
-		<name>form</name>
-		<tag-class>org.mikha.utils.web.jsp.FormTag</tag-class>
-		<body-content>scriptless</body-content>
 		<description>
 			Similar to &lt;url&gt; tag, but generates form with hidden
 			parameters instead. &lt;input type="submit"&gt; must be
 			included explicitly.
 		</description>
+		<name>form</name>
+		<tag-class>org.mikha.utils.web.jsp.FormTag</tag-class>
+		<body-content>scriptless</body-content>
 		<attribute>
 			<name>url</name>
-			<type>java.lang.Object</type>
 			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<name>method</name>
+			<rtexprvalue>false</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<name>id</name>
+			<rtexprvalue>false</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<name>class</name>
+			<rtexprvalue>false</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<name>style</name>
+			<rtexprvalue>false</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 	</tag>

@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sourceforge.mikha-web-utils</groupId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.1</version>
 	<artifactId>web-utils-parent</artifactId>
 	<packaging>pom</packaging>
 	<name>Mikha's Web Utilities - Meta-Project</name>
@@ -15,8 +15,8 @@
 	</licenses>
 
 	<scm>
-		<url>https://sourceforge.net/apps/trac/mikha-web-utils/browser</url>
-		<connection>scm:svn:https://mikha-web-utils.svn.sourceforge.net/svnroot/mikha-web-utils/trunk</connection>
+		<url>https://sourceforge.net/apps/trac/mikha-web-utils/browser/tags/web-utils-1.1</url>
+		<connection>scm:svn:https://mikha-web-utils.svn.sourceforge.net/svnroot/mikha-web-utils/tags/web-utils-1.1</connection>
 	</scm>
 
 	<distributionManagement>

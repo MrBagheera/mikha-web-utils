@@ -22,7 +22,7 @@
 	<distributionManagement>
 		<repository>
 			<id>mikha-web-utils.sourceforge.net</id>
-			<url>sftp://web.sourceforge.net/home/groups/m/mi/mikha-web-utils/htdocs/maven/</url>
+			<url>sftp://web.sourceforge.net/home/project-web/mikha-web-utils/htdocs/maven/</url>
 		</repository>
 	</distributionManagement>
 

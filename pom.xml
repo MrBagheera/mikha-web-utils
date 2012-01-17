@@ -6,7 +6,7 @@
 		<version>7</version>
 	</parent>
 	<groupId>net.sourceforge.mikha-web-utils</groupId>
-	<version>1.2-SNAPSHOT</version>
+	<version>1.2</version>
 	<artifactId>web-utils-parent</artifactId>
 	<packaging>pom</packaging>
 	<name>Mikha's Web Utilities - Meta-Project</name>
@@ -20,9 +20,9 @@
 	</licenses>
 
 	<scm>
-		<url>https://sourceforge.net/apps/trac/mikha-web-utils/browser</url>
-		<connection>scm:svn:https://mikha-web-utils.svn.sourceforge.net/svnroot/mikha-web-utils/trunk</connection>
-		<developerConnection>scm:svn:https://mikha-web-utils.svn.sourceforge.net/svnroot/mikha-web-utils/trunk</developerConnection>
+		<url>https://sourceforge.net/apps/trac/mikha-web-utils/browser/tags/web-utils-1.2</url>
+		<connection>scm:svn:https://mikha-web-utils.svn.sourceforge.net/svnroot/mikha-web-utils/tags/web-utils-1.2</connection>
+		<developerConnection>scm:svn:https://mikha-web-utils.svn.sourceforge.net/svnroot/mikha-web-utils/tags/web-utils-1.2</developerConnection>
 	</scm>
 	
 	<developers>

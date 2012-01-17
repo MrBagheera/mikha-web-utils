@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>net.sourceforge.mikha-web-utils</groupId>
 		<artifactId>web-utils-parent</artifactId>
-		<version>1.2-SNAPSHOT</version>
+		<version>1.2</version>
 	</parent>
 	<artifactId>web-utils-examples</artifactId>
 	<packaging>war</packaging>

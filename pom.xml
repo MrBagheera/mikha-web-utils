@@ -1,5 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
 	<groupId>net.sourceforge.mikha-web-utils</groupId>
 	<version>1.2-SNAPSHOT</version>
 	<artifactId>web-utils-parent</artifactId>
@@ -18,14 +23,15 @@
 		<url>https://sourceforge.net/apps/trac/mikha-web-utils/browser</url>
 		<connection>scm:svn:https://mikha-web-utils.svn.sourceforge.net/svnroot/mikha-web-utils/trunk</connection>
 	</scm>
-
-	<distributionManagement>
-		<repository>
-			<id>mikha-web-utils.sourceforge.net</id>
-			<url>sftp://web.sourceforge.net/home/project-web/mikha-web-utils/htdocs/maven/</url>
-		</repository>
-	</distributionManagement>
-
+	
+	<developers>
+		<developer>
+			<id>dmitrymikh</id>
+			<name>Dmitry Mikhaylov</name>
+			<email>mikhailov.dmitry@gmail.com</email>
+		</developer>
+	</developers>
+	
 	<modules>
 		<module>web-utils</module>
 		<module>web-utils-examples</module>
@@ -52,13 +58,6 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
-
-		<extensions>
-			<extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-ssh</artifactId>
-			</extension>
-		</extensions>
 	</build>
 
 </project>
